@@ -24,29 +24,9 @@ const Navbar = () => {
           <span className="logo-text">AI Translator</span>
         </div>
 
-        {/* Navigation Links */}
-        <div className={`navbar-menu ${isMenuOpen ? 'active' : ''}`}>
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <a href="#home" className="nav-link active">Home</a>
-            </li>
-            <li className="nav-item">
-              <a href="#translate" className="nav-link">Translate</a>
-            </li>
-            <li className="nav-item">
-              <a href="#languages" className="nav-link">Languages</a>
-            </li>
-            <li className="nav-item">
-              <a href="#about" className="nav-link">About</a>
-            </li>
-          </ul>
-        </div>
+        
 
-        {/* Action Buttons */}
-        <div className="navbar-actions">
-          <button className="btn-secondary">Sign In</button>
-          <button className="btn-primary">Get Started</button>
-        </div>
+       
 
         {/* Mobile Menu Toggle */}
         <button 
