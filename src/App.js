@@ -1,13 +1,13 @@
-// src/App.jsx
+// src/App.js
 import React from 'react';
-import Navbar from './components/Navbar';
-import Main from './components/Main';
+import './App.css';
+import Navbar from './components/Navbar.jsx';
+import Main from './components/Main.jsx';
 
 function App() {
   return (
-    <div>
+    <div className="App">
       <Navbar />
-      {/* Your translator UI goes here */}
       <Main />
     </div>
   );
