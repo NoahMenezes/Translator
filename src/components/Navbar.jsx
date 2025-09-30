@@ -77,4 +77,4 @@ const Navbar = ({ onThemeChange, currentTheme, onChangeTheme }) => {
   );
 };
 
-export default Navbar;
+export default Navbar; 
