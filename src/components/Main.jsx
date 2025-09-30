@@ -32,13 +32,16 @@ const Main = () => {
       }
       
       console.log(`Translating to ${language.name}...`);
-      const result = await translateText(inputText, language.name);
+      const prompt = `Translate the following text to ${language.name}: "${inputText}"`;
+      const result = await translateText(prompt);
       
       if (!result) {
         throw new Error('No translation returned from API');
       }
       
-      setTranslatedText(result);
+      // Clean up the response to remove any markdown or extra quotes
+      const cleanResult = result.replace(/^"|"$/g, '').trim();
+      setTranslatedText(cleanResult);
       console.log('Translation successful');
       
     } catch (err) {
@@ -55,7 +58,7 @@ const Main = () => {
       } else if (err.message.includes('empty')) {
         errorMessage += 'Received empty response from the translation service.';
       } else {
-        errorMessage += 'Please try again later.';
+        errorMessage += err.message || 'Please try again later.';
       }
       
       setError(errorMessage);
@@ -116,15 +119,36 @@ const Main = () => {
         </div>
       )}
 
-      {/* Translation Result - Only visible after translation */}
-      {translatedText && (
-        <div className="result-section">
-          <h3>Translation Result</h3>
-          <div className="translation-result">
-            {translatedText}
-          </div>
+      {/* Translation Result - Shows loading or result */}
+      <div className="result-section" style={{ display: translatedText || isLoading ? 'block' : 'none' }}>
+        <h3>Translation Result</h3>
+        <div className="translation-result">
+          {isLoading ? (
+            <div className="loading-animation">Translating...</div>
+          ) : (
+            translatedText
+          )}
         </div>
-      )}
+        {translatedText && (
+          <button 
+            className="copy-button"
+            onClick={() => {
+              navigator.clipboard.writeText(translatedText);
+              // Optional: Add a temporary "Copied!" message
+              const button = document.querySelector('.copy-button');
+              if (button) {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                setTimeout(() => {
+                  button.textContent = originalText;
+                }, 2000);
+              }
+            }}
+          >
+            Copy to Clipboard
+          </button>
+        )}
+      </div>
     </div>
   )
 }
