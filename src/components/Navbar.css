@@ -1,19 +1,26 @@
-/* Navbar.css - PollyGlot Style Navbar */
+/* Navbar.css - Modern PollyGlot Navbar */
 
 /* CSS Variables for consistent theming */
 :root, [data-theme="light"] {
+  /* Vibrant color palette */
   --polly-dark-blue: #1e3a8a;
-  --polly-blue: #2563eb;
-  --polly-light-blue: #3b82f6;
+  --polly-blue: #3b82f6;
+  --polly-light-blue: #60a5fa;
+  --polly-accent: #6366f1;
+  --polly-purple: #8b5cf6;
+  --polly-pink: #ec4899;
   --text-white: #ffffff;
-  --bg-color: #ffffff;
-  --text-color: #1f2937;
-  --navbar-bg: var(--polly-dark-blue);
+  --bg-color: #f8fafc;
+  --text-color: #1e293b;
+  --navbar-bg: rgba(255, 255, 255, 0.9);
+  --navbar-text: #1e3a8a;
+  --navbar-hover: rgba(37, 99, 235, 0.1);
   --card-bg: #ffffff;
-  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --border-color: #e5e7eb;
   --navbar-height: 80px;
-  --transition: all 0.3s ease;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --border-radius: 8px;
 }
 
 /* Reset and base styles */
@@ -31,18 +38,26 @@
   right: 0;
   height: var(--navbar-height);
   background: var(--navbar-bg);
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0.9) 0%, 
+    rgba(248, 250, 252, 0.9) 100%);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
   z-index: 1000;
   overflow: hidden;
-  animation: fadeIn 0.2s ease-out;
+  animation: fadeIn 0.3s ease-out;
   display: flex;
   justify-content: center;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(203, 213, 225, 0.3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 .navbar-container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 2.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -54,144 +69,102 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-.theme-option {
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Logo styles */
+.navbar-logo {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  width: 100%;
-  padding: 0.75rem 1rem;
-  background: none;
-  border: none;
-  text-align: left;
-  cursor: pointer;
-  color: #333;
-  transition: all 0.2s ease;
-  font-size: 0.9rem;
+  gap: 1rem;
+  text-decoration: none;
+  color: var(--navbar-text);
+  transition: var(--transition);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
 }
 
-.theme-option:hover {
-  background-color: #f5f5f5;
+.navbar-logo:hover {
+  background: var(--navbar-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
 }
 
-.theme-option.active {
-  background-color: #f0f0f0;
-  font-weight: 500;
-}
-
-.theme-color {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  border-radius: 4px;
-  flex-shrink: 0;
-}
-
-/* Dark mode styles for dropdown */
-[data-theme="dark"] .theme-dropdown {
-  background: #2d3748;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-[data-theme="dark"] .theme-option {
-  color: #e2e8f0;
-}
-
-[data-theme="dark"] .theme-option:hover {
-  background-color: #4a5568;
-}
-
-[data-theme="dark"] .theme-option.active {
-  background-color: #4a5568;
-}
-
+/* Logo icon */
 .logo-icon {
-  font-size: 2rem;
+  font-size: 2.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--polly-blue), var(--polly-purple));
+  color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3), 
+              0 2px 4px -1px rgba(99, 102, 241, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.logo-icon:hover {
+  transform: rotate(5deg) scale(1.05);
+  box-shadow: 0 6px 12px -1px rgba(59, 130, 246, 0.4);
+}
+
+/* Logo text */
 .logo-text {
-  color: var(--text-white);
-  font-weight: 700;
-  font-size: 1.5rem;
-  white-space: nowrap;
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, var(--polly-blue), var(--polly-purple), var(--polly-pink));
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient 8s ease infinite;
+  transition: var(--transition);
 }
 
+/* Tagline */
 .navbar-tagline {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 0.95rem;
-  font-weight: 400;
-  margin-left: 0.5rem;
-  white-space: nowrap;
+  color: #4b5563;
+  font-size: 1.15rem;
+  font-weight: 500;
+  opacity: 0.9;
+  transition: var(--transition);
+  position: relative;
+  padding-left: 1.5rem;
+  font-style: italic;
+  background: linear-gradient(90deg, #4b5563, #64748b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .navbar {
-    padding: 0 1rem;
     height: 70px;
   }
   
+  .navbar-container {
+    padding: 0 1.5rem;
+  }
+  
   .logo-text {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
+  }
+  
+  .logo-icon {
+    font-size: 1.8rem;
+    width: 2.2rem;
+    height: 2.2rem;
   }
   
   .navbar-tagline {
     display: none;
-  }
-  
-  .logo-icon {
-    font-size: 1.8rem;
-  }
-}
-
-/* Add padding to body to account for fixed navbar */
-body {
-  padding-top: var(--navbar-height);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .navbar-container {
-    padding: 0 1rem;
-  }
-
-  .navbar-logo {
-    gap: 0.5rem;
-  }
-
-  .logo-text {
-    font-size: 1.5rem;
-  }
-
-  .logo-icon {
-    font-size: 2rem;
-  }
-
-  .navbar-tagline {
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .navbar-container {
-    padding: 0 0.75rem;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.5rem;
-  }
-
-  .navbar-logo {
-    gap: 0.5rem;
-  }
-
-  .logo-text {
-    font-size: 1.3rem;
-  }
-
-  .logo-icon {
-    font-size: 1.8rem;
-  }
-
-  .navbar-tagline {
-    font-size: 0.8rem;
   }
 }
