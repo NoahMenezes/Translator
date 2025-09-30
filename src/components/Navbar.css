@@ -173,6 +173,7 @@ html {
   padding: 0.5rem 0;
 }
 
+/* --- LOGO ICON: Using theme primary/accent colors --- */
 .logo-icon {
   font-size: 2rem;
   margin-right: 0.75rem;
@@ -180,6 +181,7 @@ html {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  /* Use gradient and clip for coloring the icon */
   background: linear-gradient(135deg, var(--primary), var(--accent));
   -webkit-background-clip: text;
   -moz-background-clip: text;
@@ -194,24 +196,27 @@ html {
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
 }
 
+/* --- LOGO TEXT: Simplified for clarity and visibility --- */
 .logo-text {
   position: relative;
-  background: linear-gradient(90deg, var(--text-primary), var(--primary));
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  font-size: 1.6rem; /* Make it a clear size */
   transition: all 0.3s ease;
-}
-
-.navbar-logo:hover .logo-text {
+  
+  /* Use the primary/accent gradient for clear visibility */
   background: linear-gradient(90deg, var(--primary), var(--accent));
   -webkit-background-clip: text;
   -moz-background-clip: text;
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 10px rgba(37, 99, 235, 0.2); /* Subtle lift */
+}
+
+.navbar-logo:hover .logo-text {
+  text-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  transform: translateY(-1px);
 }
 
 /* Navigation Links */
@@ -572,86 +577,10 @@ html {
   display: none !important;
 }
 
-
 @keyframes gradient {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
-}
-
-/* Logo styles */
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin: 0;
-  padding: 0 1rem;
-  list-style: none;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 12px;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid var(--glass-border);
-  padding: 0.5rem;
-  color: var(--primary);
-  font-weight: 700;
-  font-size: 1.25rem;
-  transition: var(--transition);
-}
-
-.nav-link {
-  text-decoration: none;
-  color: var(--primary);
-  font-weight: 700;
-  font-size: 1.25rem;
-  transition: var(--transition);
-  padding: 0.5rem 1.25rem;
-}
-
-.nav-link:hover {
-  background: rgba(255, 255, 255, 0.8);
-  color: var(--primary);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
-}
-
-/* Logo icon */
-.logo-icon {
-  font-size: 2.25rem;
-  width: 2.5rem;
-  height: 2.5rem;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, var(--polly-blue), var(--polly-purple), var(--polly-pink));
-  color: white;
-  border-radius: 16px;
-  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3), 
-              0 2px 4px -1px rgba(99, 102, 241, 0.2);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.logo-icon:hover {
-  transform: rotate(5deg) scale(1.05);
-  box-shadow: 0 6px 12px -1px rgba(59, 130, 246, 0.4);
-}
-
-/* Logo text */
-.logo-text {
-  font-size: 1.85rem;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  background: linear-gradient(135deg, var(--polly-blue), var(--polly-purple), var(--polly-pink));
-  background-size: 200% auto;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradient 8s ease infinite;
-  transition: var(--transition);
 }
 
 /* Tagline */

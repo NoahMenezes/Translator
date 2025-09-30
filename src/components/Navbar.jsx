@@ -32,7 +32,7 @@ const Navbar = ({ onThemeChange, currentTheme, onChangeTheme }) => {
   };
 
   const [showThemePicker, setShowThemePicker] = useState(false);
- 
+  
 
   const handleThemeSelect = (theme) => {
     onChangeTheme(theme);
@@ -61,24 +61,7 @@ const Navbar = ({ onThemeChange, currentTheme, onChangeTheme }) => {
 
           
 
-          {/* Theme Picker */}
-          <div className="theme-picker">
-            
-            {showThemePicker && (
-              <div className="theme-colors">
-                {Object.entries(THEMES).map(([key, theme]) => (
-                  <button
-                    key={key}
-                    className={`theme-color ${key}`}
-                    onClick={() => handleThemeSelect(key)}
-                    style={{ background: `var(--primary-${key})` }}
-                    aria-label={`${theme.name} theme`}
-                    title={theme.name}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
+          
           
           {/* Theme Toggle */}
           <button
