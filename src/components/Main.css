@@ -1,33 +1,36 @@
 /* Main.css - Modern Translator Layout */
 
 :root {
-  --primary: #4f46e5;
-  --primary-light: #818cf8;
+  --primary: #2563eb;
+  --primary-light: #3b82f6;
   --secondary: #10b981;
-  --accent: #f59e0b;
-  --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #f0f9ff 100%);
-  --card-bg: rgba(255, 255, 255, 0.9);
+  --accent: #06b6d4;
+  --bg-gradient: linear-gradient(135deg, #e0f2fe 0%, #cffafe 50%, #ccfbf1 100%);
+  --card-bg: rgba(255, 255, 255, 0.85);
   --card-hover: rgba(255, 255, 255, 0.95);
-  --text-primary: #1e293b;
-  --text-secondary: #475569;
-  --border-color: rgba(203, 213, 225, 0.5);
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --border-color: rgba(14, 165, 233, 0.2);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --glass-effect: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.18);
 }
 
 .main-container {
-  min-height: calc(100vh - 120px);
+  min-height: 100vh;
   background: var(--bg-gradient);
   color: var(--text-primary);
   padding: 2rem 5%;
   max-width: 1400px;
   margin: 0 auto;
-  margin-top: 100px;
+  padding-top: 120px;
   transition: var(--transition);
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(10px);
 }
 
 .main-container::before {
@@ -48,15 +51,17 @@
   margin-bottom: 2.5rem;
   max-width: 100%;
   padding: 2.5rem;
-  background: var(--card-bg);
+  background: var(--glass-effect);
   border-radius: 20px;
   box-shadow: var(--shadow-lg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border-color);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
   transition: var(--transition);
   z-index: 1;
   overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .input-section::before {
@@ -95,11 +100,13 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   resize: vertical;
   min-height: 200px;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.9);
   transition: var(--transition);
   box-shadow: var(--shadow-sm);
   line-height: 1.6;
   color: var(--text-primary);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .text-input:hover {
@@ -119,15 +126,17 @@
   margin: 3rem 0;
   max-width: 100%;
   padding: 2.5rem;
-  background: var(--card-bg);
+  background: var(--glass-effect);
   border-radius: 20px;
   box-shadow: var(--shadow-lg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border-color);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
   transition: var(--transition);
   z-index: 1;
   overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .language-section::before {
@@ -228,21 +237,40 @@
 
 .translate-button {
   padding: 1rem 3rem;
-  background: #2563eb;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 1.2rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.25);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
 
 .translate-button:hover {
-  background: #1d4ed8;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px -1px rgba(37, 99, 235, 0.3);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+}
+
+.translate-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.translate-button:hover::before {
+  opacity: 1;
 }
 
 .translate-button:active {
