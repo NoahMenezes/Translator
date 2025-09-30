@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import './Main.css';
+import { translateText } from './config/gemini';
 
 const Main = () => {
   const [inputText, setInputText] = useState('');
   const [selectedLanguage, setSelectedLanguage] = useState('');
   const [translatedText, setTranslatedText] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const languages = [
     { code: 'fr', name: 'French', flag: '🇫🇷' },
@@ -15,9 +18,51 @@ const Main = () => {
     { code: 'pt', name: 'Portuguese', flag: '🇵🇹' }
   ];
 
-  const handleTranslate = () => {
-    // Here you would typically call a translation API
-    setTranslatedText(`[${selectedLanguage.toUpperCase()}] ${inputText}`);
+  const handleTranslate = async () => {
+    if (!inputText.trim() || !selectedLanguage) return;
+    
+    setIsLoading(true);
+    setError('');
+    setTranslatedText('');
+    
+    try {
+      const language = languages.find(lang => lang.code === selectedLanguage);
+      if (!language) {
+        throw new Error('Selected language not found');
+      }
+      
+      console.log(`Translating to ${language.name}...`);
+      const result = await translateText(inputText, language.name);
+      
+      if (!result) {
+        throw new Error('No translation returned from API');
+      }
+      
+      setTranslatedText(result);
+      console.log('Translation successful');
+      
+    } catch (err) {
+      console.error('Translation error:', err);
+      
+      let errorMessage = 'Translation failed. ';
+      
+      if (err.message.includes('API key')) {
+        errorMessage += 'Invalid API key. Please check your Gemini API key.';
+      } else if (err.message.includes('quota')) {
+        errorMessage += 'API quota exceeded. Please check your Google Cloud account.';
+      } else if (err.message.includes('network')) {
+        errorMessage += 'Network error. Please check your internet connection.';
+      } else if (err.message.includes('empty')) {
+        errorMessage += 'Received empty response from the translation service.';
+      } else {
+        errorMessage += 'Please try again later.';
+      }
+      
+      setError(errorMessage);
+      setTranslatedText('');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -63,10 +108,11 @@ const Main = () => {
           <button 
             className="translate-button"
             onClick={handleTranslate}
-            disabled={!inputText.trim()}
+            disabled={!inputText.trim() || isLoading}
           >
-            Translate
+            {isLoading ? 'Translating...' : 'Translate'}
           </button>
+          {error && <div className="error-message">{error}</div>}
         </div>
       )}
 

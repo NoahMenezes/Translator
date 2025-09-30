@@ -2,11 +2,13 @@
 
 .main-container {
   min-height: calc(100vh - 120px);
-  background: white;
+  background: var(--bg-color);
+  color: var(--text-color);
   padding: 2rem 5%;
   max-width: 1200px;
   margin: 0 auto;
   margin-top: 120px; /* Account for fixed navbar */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Input Section */
@@ -130,6 +132,44 @@
   transform: translateY(0);
 }
 
+.translate-button:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.error-message {
+  color: #dc2626;
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 500;
+  padding: 0.75rem;
+  background-color: #fef2f2;
+  border-radius: 8px;
+  border: 1px solid #fecaca;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.translate-button:disabled:not(.loading) {
+  opacity: 0.7;
+}
+
+.translate-button.loading::after {
+  content: '';
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
 /* Result Section */
 .result-section {
   margin: 3rem 0;
@@ -141,21 +181,21 @@
 }
 
 .result-section h3 {
-  color: #1e3a8a;
+  color: var(--heading-color);
   margin-bottom: 1.5rem;
   font-size: 1.4rem;
   font-weight: 600;
 }
 
 .translation-result {
-  background: white;
-  border: 2px solid #e5e7eb;
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
   border-radius: 12px;
   padding: 1.5rem;
   min-height: 100px;
   font-size: 1.1rem;
   line-height: 1.6;
-  color: #1f2937;
+  color: var(--text-color);
   white-space: pre-wrap;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }

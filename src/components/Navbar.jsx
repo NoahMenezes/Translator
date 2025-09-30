@@ -1,8 +1,11 @@
 // src/components/Navbar.jsx
 import React from 'react';
 import './Navbar.css';
+import { useTheme } from '../context/ThemeContext';
+import { FiSun, FiMoon } from 'react-icons/fi';
 
 const Navbar = () => {
+  const { isDarkMode, toggleTheme } = useTheme();
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -16,6 +19,13 @@ const Navbar = () => {
         <div className="navbar-tagline">
           Perfect Translation Every Time
         </div>
+        <button 
+          className="theme-toggle"
+          onClick={toggleTheme}
+          aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+        >
+          {isDarkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
+        </button>
       </div>
     </nav>
   );

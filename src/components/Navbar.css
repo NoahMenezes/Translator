@@ -1,11 +1,17 @@
 /* Navbar.css - PollyGlot Style Navbar */
 
 /* CSS Variables for consistent theming */
-:root {
+:root, [data-theme="light"] {
   --polly-dark-blue: #1e3a8a;
   --polly-blue: #2563eb;
   --polly-light-blue: #3b82f6;
   --text-white: #ffffff;
+  --bg-color: #ffffff;
+  --text-color: #1f2937;
+  --navbar-bg: var(--polly-dark-blue);
+  --card-bg: #ffffff;
+  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --border-color: #e5e7eb;
   --navbar-height: 80px;
   --transition: all 0.3s ease;
 }
@@ -24,7 +30,7 @@
   left: 0;
   right: 0;
   height: var(--navbar-height);
-  background: var(--polly-dark-blue);
+  background: var(--navbar-bg);
   z-index: 1000;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   display: flex;
